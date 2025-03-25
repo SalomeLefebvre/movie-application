@@ -8,9 +8,9 @@
   "dependencies": {
     "mongodb": "^6.5.0",
     "next": "latest",
-    "next-swagger-doc": "^0.4.0",
     "react": "^18",
     "react-dom": "^18",
+    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-react": "^5.20.1"
   },
   "devDependencies": {
