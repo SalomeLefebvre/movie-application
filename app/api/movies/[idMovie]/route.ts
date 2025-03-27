@@ -6,6 +6,7 @@ import { Db, MongoClient, ObjectId } from 'mongodb';
  * @swagger
  * /api/movies/{idMovie}:
  *   get:
+ *     tags: [Movies]
  *     summary: Récupérer un film par son ID
  *     parameters:
  *       - in: path
@@ -47,6 +48,7 @@ import { Db, MongoClient, ObjectId } from 'mongodb';
  *       500:
  *         description: Erreur interne du serveur
  *   post:
+ *     tags: [Movies]
  *     summary: Ajouter un film
  *     requestBody:
  *       required: true
@@ -98,6 +100,7 @@ import { Db, MongoClient, ObjectId } from 'mongodb';
  *       500:
  *         description: Erreur interne du serveur
  *   put:
+ *     tags: [Movies]
  *     summary: Modifier un film par son ID
  *     parameters:
  *       - in: path
@@ -158,6 +161,7 @@ import { Db, MongoClient, ObjectId } from 'mongodb';
  *       500:
  *         description: Erreur interne du serveur
  *   delete:
+ *     tags: [Movies]
  *     summary: Supprimer un film par son ID
  *     parameters:
  *       - in: path

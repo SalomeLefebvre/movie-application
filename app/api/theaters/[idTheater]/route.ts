@@ -6,6 +6,7 @@ import clientPromise from '@/lib/mongodb';
  * @swagger
  * /api/theaters/{idTheater}:
  *   get:
+ *     tags: [Theaters]
  *     summary: Récupérer un théâtre ou un cinéma
  *     parameters:
  *       - in: path
@@ -44,6 +45,7 @@ import clientPromise from '@/lib/mongodb';
  *       500:
  *         description: Erreur interne du serveur
  *   post:
+ *     tags: [Theaters]
  *     summary: Ajouter un théâtre ou un cinéma
  *     requestBody:
  *       required: true
@@ -78,6 +80,7 @@ import clientPromise from '@/lib/mongodb';
  *       500:
  *         description: Erreur interne du serveur
  *   put:
+ *     tags: [Theaters]
  *     summary: Modifier un théâtre ou un cinéma
  *     parameters:
  *       - in: path
@@ -120,6 +123,7 @@ import clientPromise from '@/lib/mongodb';
  *       500:
  *         description: Erreur interne du serveur
  *   delete:
+ *     tags: [Theaters]
  *     summary: Supprimer un théâtre ou un cinéma
  *     parameters:
  *       - in: path

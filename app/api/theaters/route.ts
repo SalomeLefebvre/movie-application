@@ -6,6 +6,7 @@ import clientPromise from '@/lib/mongodb';
  * @swagger
  * /api/theaters:
  *   get:
+ *     tags: [Theaters]
  *     summary: Récupérer la liste de tous les théâtres et cinémas
  *     responses:
  *       200:

@@ -6,6 +6,7 @@ import clientPromise from '@/lib/mongodb';
  * @swagger
  * /api/movies/comments/{idComment}:
  *   get:
+ *     tags: [Comments]
  *     summary: Récupérer un commentaire d'un film
  *     parameters:
  *       - in: path
@@ -44,6 +45,7 @@ import clientPromise from '@/lib/mongodb';
  *       500:
  *         description: Erreur interne du serveur
  *   post:
+ *     tags: [Comments]
  *     summary: Ajouter un commentaire à un film
  *     requestBody:
  *       required: true
@@ -80,6 +82,7 @@ import clientPromise from '@/lib/mongodb';
  *       500:
  *         description: Erreur interne du serveur
  *   put:
+ *     tags: [Comments]
  *     summary: Modifier un commentaire d'un film
  *     parameters:
  *       - in: path
@@ -119,6 +122,7 @@ import clientPromise from '@/lib/mongodb';
  *       500:
  *         description: Erreur interne du serveur
  *   delete:
+ *     tags: [Comments]
  *     summary: Supprimer un commentaire d'un film
  *     parameters:
  *       - in: path
