@@ -70,3 +70,129 @@ export async function GET(request: NextRequest, context: { params: Promise<{ idM
     return NextResponse.json({ status: 500, message: 'Internal Server Error', error: error.message });
   }
 }
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+
+    const { title, releaseDate, genre } = body;
+
+    if (!title || !releaseDate || !genre) {
+      return NextResponse.json({
+        status: 400,
+        message: 'Missing required fields',
+        error: 'title, releaseDate, and genre are required',
+      });
+    }
+
+    const client: MongoClient = await clientPromise;
+    const db: Db = client.db('sample_mflix');
+
+    const result = await db.collection('movies').insertOne({
+      title,
+      releaseDate,
+      genre,
+    });
+
+    return NextResponse.json({
+      status: 201,
+      message: 'Movie created',
+      data: { _id: result.insertedId, title, releaseDate, genre },
+    });
+  } catch (error: any) {
+    return NextResponse.json({
+      status: 500,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+}
+
+export async function PUT(
+  request: NextRequest,
+  context: { params: Promise<{ idMovie: string }> }
+) {
+  try {
+    const { idMovie } = await context.params;
+    const body = await request.json();
+
+    if (!ObjectId.isValid(idMovie)) {
+      return NextResponse.json({
+        status: 400,
+        message: 'Invalid movie ID',
+        error: 'ID format is incorrect',
+      });
+    }
+
+    const { title, releaseDate, genre } = body;
+
+    const client: MongoClient = await clientPromise;
+    const db: Db = client.db('sample_mflix');
+
+    const result = await db.collection('movies').updateOne(
+      { _id: new ObjectId(idMovie) },
+      { $set: { title, releaseDate, genre } }
+    );
+
+    if (result.matchedCount === 0) {
+      return NextResponse.json({
+        status: 404,
+        message: 'Movie not found',
+        error: 'No movie found with the given ID',
+      });
+    }
+
+    return NextResponse.json({
+      status: 200,
+      message: 'Movie updated successfully',
+      data: { _id: idMovie, title, releaseDate, genre },
+    });
+  } catch (error: any) {
+    return NextResponse.json({
+      status: 500,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  context: { params: Promise<{ idMovie: string }> }
+) {
+  try {
+    const { idMovie } = await context.params;
+
+    if (!ObjectId.isValid(idMovie)) {
+      return NextResponse.json({
+        status: 400,
+        message: 'Invalid movie ID',
+        error: 'ID format is incorrect',
+      });
+    }
+
+    const client: MongoClient = await clientPromise;
+    const db: Db = client.db('sample_mflix');
+
+    const result = await db.collection('movies').deleteOne({ _id: new ObjectId(idMovie) });
+
+    if (result.deletedCount === 0) {
+      return NextResponse.json({
+        status: 404,
+        message: 'Movie not found',
+        error: 'No movie found with the given ID',
+      });
+    }
+
+    return NextResponse.json({
+      status: 200,
+      message: 'Movie deleted successfully',
+    });
+  } catch (error: any) {
+    return NextResponse.json({
+      status: 500,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+}
