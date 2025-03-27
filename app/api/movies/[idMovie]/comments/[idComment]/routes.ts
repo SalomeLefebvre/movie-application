@@ -4,7 +4,7 @@ import clientPromise from '@/lib/mongodb';
 
 /**
  * @swagger
- * /api/movies/comments/{idComment}:
+ * /api/movies/{idMovie}/comments/{idComment}:
  *   get:
  *     summary: Récupérer un commentaire d'un film
  *     parameters:

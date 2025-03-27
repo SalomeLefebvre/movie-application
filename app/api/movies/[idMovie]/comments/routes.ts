@@ -4,7 +4,7 @@ import clientPromise from '@/lib/mongodb';
 
 /**
  * @swagger
- * /api/movies/comments:
+ * /api/movies/{idMovie}/comments:
  *   get:
  *     summary: Récupérer la liste de tous les commentaires liés à un film
  *     parameters:
@@ -44,13 +44,10 @@ import clientPromise from '@/lib/mongodb';
  *       500:
  *         description: Erreur interne du serveur
  */
-export async function GET(request: Request): Promise<NextResponse> {
+export async function GET(request: Request, { params }: { params: { idMovie: string } }): Promise<NextResponse> {
   try {
-    const url = new URL(request.url);
-    const idMovie = url.searchParams.get('idMovie');
-
-    if (!idMovie || !ObjectId.isValid(idMovie)) {
-      console.log(idMovie);
+    const { idMovie } = params;
+    if (!ObjectId.isValid(idMovie)) {
       return NextResponse.json({ status: 400, message: 'Invalid movie ID', error: 'ID format is incorrect' });
     }
 
