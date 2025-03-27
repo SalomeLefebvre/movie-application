@@ -4,7 +4,7 @@ import clientPromise from '@/lib/mongodb';
 
 /**
  * @swagger
- * /api/movies/theaters/{idTheater}:
+ * /api/theaters/{idTheater}:
  *   get:
  *     summary: Récupérer un théâtre ou un cinéma
  *     parameters:
