@@ -4,19 +4,19 @@ import { Db, MongoClient, ObjectId } from 'mongodb';
 
 /**
  * @swagger
- * /api/movies/{idMovie}:
+ * /api/movies/comments/{idComment}:
  *   get:
- *     summary: Récupérer un film par son ID
+ *     summary: Récupérer un commentaire d'un film
  *     parameters:
  *       - in: path
- *         name: idMovie
+ *         name: idComment
  *         schema:
  *           type: string
  *         required: true
- *         description: ID du film
+ *         description: ID du commentaire
  *     responses:
  *       200:
- *         description: Film récupéré
+ *         description: Commentaire récupéré
  *         content:
  *           application/json:
  *             schema:
@@ -30,20 +30,91 @@ import { Db, MongoClient, ObjectId } from 'mongodb';
  *                   properties:
  *                     _id:
  *                       type: string
- *                       example: "60d5f96f4f3a4f3a4f3a4f3a"
- *                     title:
+ *                     movie_id:
  *                       type: string
- *                       example: "Inception"
- *                     releaseDate:
+ *                     text:
  *                       type: string
- *                       example: "2010-07-16"
- *                     genre:
+ *       400:
+ *         description: ID de commentaire invalide
+ *       404:
+ *         description: Commentaire non trouvé
+ *       500:
+ *         description: Erreur interne du serveur
+ *   post:
+ *     summary: Ajouter un commentaire à un film
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               movie_id:
+ *                 type: string
+ *               text:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Commentaire ajouté
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
  *                       type: string
- *                       example: "Science Fiction"
  *       400:
  *         description: ID de film invalide
+ *       500:
+ *         description: Erreur interne du serveur
+ *   put:
+ *     summary: Modifier un commentaire d'un film
+ *     parameters:
+ *       - in: path
+ *         name: idComment
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID du commentaire
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               text:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Commentaire modifié
+ *       400:
+ *         description: ID de commentaire invalide
  *       404:
- *         description: Film non trouvé
+ *         description: Commentaire non trouvé
+ *       500:
+ *         description: Erreur interne du serveur
+ *   delete:
+ *     summary: Supprimer un commentaire d'un film
+ *     parameters:
+ *       - in: path
+ *         name: idComment
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID du commentaire
+ *     responses:
+ *       200:
+ *         description: Commentaire supprimé
+ *       400:
+ *         description: ID de commentaire invalide
+ *       404:
+ *         description: Commentaire non trouvé
  *       500:
  *         description: Erreur interne du serveur
  */
