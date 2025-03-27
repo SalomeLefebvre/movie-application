@@ -50,6 +50,7 @@ export async function GET(request: Request): Promise<NextResponse> {
     const idMovie = url.searchParams.get('idMovie');
 
     if (!idMovie || !ObjectId.isValid(idMovie)) {
+      console.log(idMovie);
       return NextResponse.json({ status: 400, message: 'Invalid movie ID', error: 'ID format is incorrect' });
     }
 
