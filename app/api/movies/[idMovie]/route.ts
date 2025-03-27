@@ -4,7 +4,7 @@ import { Db, MongoClient, ObjectId } from 'mongodb';
 
 /**
  * @swagger
- * /movies/{idMovie}:
+ * /api/movies/{idMovie}:
  *   get:
  *     summary: Récupérer un film par son ID
  *     parameters:
