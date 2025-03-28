@@ -7,6 +7,31 @@ import { Db, MongoClient } from "mongodb";
 const SECRET_KEY = process.env.JWT_SECRET || "super-secret-key";
 const REFRESH_SECRET = process.env.REFRESH_SECRET || "refresh-secret";
 
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     tags: [Authentification]
+ *     summary: Authentification de l'utilisateur
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 example: "admin"
+ *               password:
+ *                 type: string
+ *                 example: "password"
+ *     responses:
+ *       200:
+ *         description: Authentification réussie
+ *       401:
+ *         description: Identifiants invalides
+ */
 export async function POST(req: Request) {
   const { username, password } = await req.json();
   const client: MongoClient = clientPromise;

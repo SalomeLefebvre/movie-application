@@ -6,6 +6,20 @@ import clientPromise from "@/lib/mongodb";
 const SECRET_KEY = process.env.JWT_SECRET || "super-secret-key";
 const REFRESH_SECRET = process.env.REFRESH_SECRET || "refresh-secret";
 
+/**
+ * @swagger
+ * /api/auth/refresh:
+ *   get:
+ *     tags: [Authentification]
+ *     summary: Rafraîchissement du token JWT
+ *     responses:
+ *       200:
+ *         description: Nouveau token généré
+ *       401:
+ *         description: Aucun token de rafraîchissement fourni
+ *       403:
+ *         description: Token de rafraîchissement invalide
+ */
 export async function GET(req: Request) {
   const refreshToken = req.headers.get("cookie")?.split("refreshToken=")[1];
   if (!refreshToken) {

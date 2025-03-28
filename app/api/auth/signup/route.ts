@@ -7,6 +7,31 @@ import clientPromise from "@/lib/mongodb";
 const SECRET_KEY = process.env.JWT_SECRET || "super-secret-key";
 const REFRESH_SECRET = process.env.REFRESH_SECRET || "refresh-secret";
 
+/**
+ * @swagger
+ * /api/auth/signup:
+ *   post:
+ *     tags: [Authentification]
+ *     summary: Inscription d'un nouvel utilisateur
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 example: "newuser"
+ *               password:
+ *                 type: string
+ *                 example: "securepassword"
+ *     responses:
+ *       201:
+ *         description: Utilisateur créé avec succès
+ *       400:
+ *         description: L'utilisateur existe déjà
+ */
 export async function POST(req: Request) {
   const { username, password } = await req.json();
   const client: MongoClient = await clientPromise;
